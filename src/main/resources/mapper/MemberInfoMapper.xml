@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rest.server.thinkcat.think.rest.member.mapper.MemberInfoMapper">
+  <resultMap id="BaseResultMap" type="rest.server.thinkcat.think.rest.member.pojo.MemberInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uuid_qq" jdbcType="VARCHAR" property="uuidQq" />
+    <result column="uuid_weixin" jdbcType="VARCHAR" property="uuidWeixin" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="vip_status" jdbcType="INTEGER" property="vipStatus" />
+    <result column="register_time" jdbcType="VARCHAR" property="registerTime" />
+    <result column="last_login_time" jdbcType="VARCHAR" property="lastLoginTime" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+    <result column="person_desc" jdbcType="VARCHAR" property="personDesc" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="person_img_url" jdbcType="VARCHAR" property="personImgUrl" />
+    <result column="im_price" jdbcType="BIGINT" property="imPrice" />
+    <result column="vip_begin_time" jdbcType="DATE" property="vipBeginTime" />
+    <result column="vip_end_time" jdbcType="DATE" property="vipEndTime" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="virtual_coin" jdbcType="BIGINT" property="virtualCoin" />
+    <result column="fans" jdbcType="INTEGER" property="fans" />
+    <result column="concerns" jdbcType="INTEGER" property="concerns" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="video_price" jdbcType="BIGINT" property="videoPrice" />
+    <result column="last_open_video_time" jdbcType="TIMESTAMP" property="lastOpenVideoTime" />
+    <result column="anchor_flag" jdbcType="INTEGER" property="anchorFlag" />
+    <result column="anchor_level_id" jdbcType="INTEGER" property="anchorLevelId" />
+    <result column="resources" jdbcType="INTEGER" property="resources" />
+    <result column="sequence" jdbcType="VARCHAR" property="sequence" />
+    <result column="application_time" jdbcType="VARCHAR" property="applicationTime" />
+    <result column="become_anchor_time" jdbcType="VARCHAR" property="becomeAnchorTime" />
+    <result column="alipay_account" jdbcType="VARCHAR" property="alipayAccount" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="video_flag" jdbcType="INTEGER" property="videoFlag" />
+    <result column="account_status" jdbcType="INTEGER" property="accountStatus" />
+    <result column="jim_password" jdbcType="VARCHAR" property="jimPassword" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, uuid_qq, uuid_weixin, phone, password, gender, vip_status, register_time, last_login_time, 
+    last_modify_time, person_desc, nickname, person_img_url, im_price, vip_begin_time, 
+    vip_end_time, app_id, app_name, virtual_coin, fans, concerns, age, job, nation, province, 
+    city, video_price, last_open_video_time, anchor_flag, anchor_level_id, resources, 
+    sequence, application_time, become_anchor_time, alipay_account, real_name, video_flag, 
+    account_status, jim_password
+  </sql>
+  <select id="selectByExample" parameterType="rest.server.thinkcat.think.rest.member.pojo.MemberInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="rest.server.thinkcat.think.rest.member.pojo.MemberInfoExample">
+    delete from member_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="rest.server.thinkcat.think.rest.member.pojo.MemberInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into member_info (id, uuid_qq, uuid_weixin, 
+      phone, password, gender, 
+      vip_status, register_time, last_login_time, 
+      last_modify_time, person_desc, nickname, 
+      person_img_url, im_price, vip_begin_time, 
+      vip_end_time, app_id, app_name, 
+      virtual_coin, fans, concerns, 
+      age, job, nation, province, 
+      city, video_price, last_open_video_time, 
+      anchor_flag, anchor_level_id, resources, 
+      sequence, application_time, become_anchor_time, 
+      alipay_account, real_name, video_flag, 
+      account_status, jim_password)
+    values (#{id,jdbcType=INTEGER}, #{uuidQq,jdbcType=VARCHAR}, #{uuidWeixin,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
+      #{vipStatus,jdbcType=INTEGER}, #{registerTime,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=VARCHAR}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP}, #{personDesc,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{personImgUrl,jdbcType=VARCHAR}, #{imPrice,jdbcType=BIGINT}, #{vipBeginTime,jdbcType=DATE}, 
+      #{vipEndTime,jdbcType=DATE}, #{appId,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+      #{virtualCoin,jdbcType=BIGINT}, #{fans,jdbcType=INTEGER}, #{concerns,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{videoPrice,jdbcType=BIGINT}, #{lastOpenVideoTime,jdbcType=TIMESTAMP}, 
+      #{anchorFlag,jdbcType=INTEGER}, #{anchorLevelId,jdbcType=INTEGER}, #{resources,jdbcType=INTEGER}, 
+      #{sequence,jdbcType=VARCHAR}, #{applicationTime,jdbcType=VARCHAR}, #{becomeAnchorTime,jdbcType=VARCHAR}, 
+      #{alipayAccount,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{videoFlag,jdbcType=INTEGER}, 
+      #{accountStatus,jdbcType=INTEGER}, #{jimPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="rest.server.thinkcat.think.rest.member.pojo.MemberInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into member_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="uuidQq != null">
+        uuid_qq,
+      </if>
+      <if test="uuidWeixin != null">
+        uuid_weixin,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="vipStatus != null">
+        vip_status,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
+      <if test="personDesc != null">
+        person_desc,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="personImgUrl != null">
+        person_img_url,
+      </if>
+      <if test="imPrice != null">
+        im_price,
+      </if>
+      <if test="vipBeginTime != null">
+        vip_begin_time,
+      </if>
+      <if test="vipEndTime != null">
+        vip_end_time,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="appName != null">
+        app_name,
+      </if>
+      <if test="virtualCoin != null">
+        virtual_coin,
+      </if>
+      <if test="fans != null">
+        fans,
+      </if>
+      <if test="concerns != null">
+        concerns,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="videoPrice != null">
+        video_price,
+      </if>
+      <if test="lastOpenVideoTime != null">
+        last_open_video_time,
+      </if>
+      <if test="anchorFlag != null">
+        anchor_flag,
+      </if>
+      <if test="anchorLevelId != null">
+        anchor_level_id,
+      </if>
+      <if test="resources != null">
+        resources,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="applicationTime != null">
+        application_time,
+      </if>
+      <if test="becomeAnchorTime != null">
+        become_anchor_time,
+      </if>
+      <if test="alipayAccount != null">
+        alipay_account,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="videoFlag != null">
+        video_flag,
+      </if>
+      <if test="accountStatus != null">
+        account_status,
+      </if>
+      <if test="jimPassword != null">
+        jim_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},
+      <if test="uuidQq != null">
+        #{uuidQq,jdbcType=VARCHAR},
+      </if>
+      <if test="uuidWeixin != null">
+        #{uuidWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="vipStatus != null">
+        #{vipStatus,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personDesc != null">
+        #{personDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="personImgUrl != null">
+        #{personImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imPrice != null">
+        #{imPrice,jdbcType=BIGINT},
+      </if>
+      <if test="vipBeginTime != null">
+        #{vipBeginTime,jdbcType=DATE},
+      </if>
+      <if test="vipEndTime != null">
+        #{vipEndTime,jdbcType=DATE},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualCoin != null">
+        #{virtualCoin,jdbcType=BIGINT},
+      </if>
+      <if test="fans != null">
+        #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="concerns != null">
+        #{concerns,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPrice != null">
+        #{videoPrice,jdbcType=BIGINT},
+      </if>
+      <if test="lastOpenVideoTime != null">
+        #{lastOpenVideoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anchorFlag != null">
+        #{anchorFlag,jdbcType=INTEGER},
+      </if>
+      <if test="anchorLevelId != null">
+        #{anchorLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="resources != null">
+        #{resources,jdbcType=INTEGER},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationTime != null">
+        #{applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="becomeAnchorTime != null">
+        #{becomeAnchorTime,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null">
+        #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoFlag != null">
+        #{videoFlag,jdbcType=INTEGER},
+      </if>
+      <if test="accountStatus != null">
+        #{accountStatus,jdbcType=INTEGER},
+      </if>
+      <if test="jimPassword != null">
+        #{jimPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="rest.server.thinkcat.think.rest.member.pojo.MemberInfoExample" resultType="java.lang.Long">
+    select count(*) from member_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update member_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.uuidQq != null">
+        uuid_qq = #{record.uuidQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uuidWeixin != null">
+        uuid_weixin = #{record.uuidWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.vipStatus != null">
+        vip_status = #{record.vipStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerTime != null">
+        register_time = #{record.registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifyTime != null">
+        last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.personDesc != null">
+        person_desc = #{record.personDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personImgUrl != null">
+        person_img_url = #{record.personImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imPrice != null">
+        im_price = #{record.imPrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.vipBeginTime != null">
+        vip_begin_time = #{record.vipBeginTime,jdbcType=DATE},
+      </if>
+      <if test="record.vipEndTime != null">
+        vip_end_time = #{record.vipEndTime,jdbcType=DATE},
+      </if>
+      <if test="record.appId != null">
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appName != null">
+        app_name = #{record.appName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualCoin != null">
+        virtual_coin = #{record.virtualCoin,jdbcType=BIGINT},
+      </if>
+      <if test="record.fans != null">
+        fans = #{record.fans,jdbcType=INTEGER},
+      </if>
+      <if test="record.concerns != null">
+        concerns = #{record.concerns,jdbcType=INTEGER},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.job != null">
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null">
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoPrice != null">
+        video_price = #{record.videoPrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastOpenVideoTime != null">
+        last_open_video_time = #{record.lastOpenVideoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.anchorFlag != null">
+        anchor_flag = #{record.anchorFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.anchorLevelId != null">
+        anchor_level_id = #{record.anchorLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.resources != null">
+        resources = #{record.resources,jdbcType=INTEGER},
+      </if>
+      <if test="record.sequence != null">
+        sequence = #{record.sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicationTime != null">
+        application_time = #{record.applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.becomeAnchorTime != null">
+        become_anchor_time = #{record.becomeAnchorTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alipayAccount != null">
+        alipay_account = #{record.alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoFlag != null">
+        video_flag = #{record.videoFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountStatus != null">
+        account_status = #{record.accountStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.jimPassword != null">
+        jim_password = #{record.jimPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update member_info
+    set id = #{record.id,jdbcType=INTEGER},
+      uuid_qq = #{record.uuidQq,jdbcType=VARCHAR},
+      uuid_weixin = #{record.uuidWeixin,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
+      vip_status = #{record.vipStatus,jdbcType=INTEGER},
+      register_time = #{record.registerTime,jdbcType=VARCHAR},
+      last_login_time = #{record.lastLoginTime,jdbcType=VARCHAR},
+      last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      person_desc = #{record.personDesc,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      person_img_url = #{record.personImgUrl,jdbcType=VARCHAR},
+      im_price = #{record.imPrice,jdbcType=BIGINT},
+      vip_begin_time = #{record.vipBeginTime,jdbcType=DATE},
+      vip_end_time = #{record.vipEndTime,jdbcType=DATE},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      app_name = #{record.appName,jdbcType=VARCHAR},
+      virtual_coin = #{record.virtualCoin,jdbcType=BIGINT},
+      fans = #{record.fans,jdbcType=INTEGER},
+      concerns = #{record.concerns,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=INTEGER},
+      job = #{record.job,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      video_price = #{record.videoPrice,jdbcType=BIGINT},
+      last_open_video_time = #{record.lastOpenVideoTime,jdbcType=TIMESTAMP},
+      anchor_flag = #{record.anchorFlag,jdbcType=INTEGER},
+      anchor_level_id = #{record.anchorLevelId,jdbcType=INTEGER},
+      resources = #{record.resources,jdbcType=INTEGER},
+      sequence = #{record.sequence,jdbcType=VARCHAR},
+      application_time = #{record.applicationTime,jdbcType=VARCHAR},
+      become_anchor_time = #{record.becomeAnchorTime,jdbcType=VARCHAR},
+      alipay_account = #{record.alipayAccount,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      video_flag = #{record.videoFlag,jdbcType=INTEGER},
+      account_status = #{record.accountStatus,jdbcType=INTEGER},
+      jim_password = #{record.jimPassword,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="rest.server.thinkcat.think.rest.member.pojo.MemberInfo">
+    update member_info
+    <set>
+      <if test="uuidQq != null">
+        uuid_qq = #{uuidQq,jdbcType=VARCHAR},
+      </if>
+      <if test="uuidWeixin != null">
+        uuid_weixin = #{uuidWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="vipStatus != null">
+        vip_status = #{vipStatus,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personDesc != null">
+        person_desc = #{personDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="personImgUrl != null">
+        person_img_url = #{personImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imPrice != null">
+        im_price = #{imPrice,jdbcType=BIGINT},
+      </if>
+      <if test="vipBeginTime != null">
+        vip_begin_time = #{vipBeginTime,jdbcType=DATE},
+      </if>
+      <if test="vipEndTime != null">
+        vip_end_time = #{vipEndTime,jdbcType=DATE},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualCoin != null">
+        virtual_coin = #{virtualCoin,jdbcType=BIGINT},
+      </if>
+      <if test="fans != null">
+        fans = #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="concerns != null">
+        concerns = #{concerns,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="videoPrice != null">
+        video_price = #{videoPrice,jdbcType=BIGINT},
+      </if>
+      <if test="lastOpenVideoTime != null">
+        last_open_video_time = #{lastOpenVideoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anchorFlag != null">
+        anchor_flag = #{anchorFlag,jdbcType=INTEGER},
+      </if>
+      <if test="anchorLevelId != null">
+        anchor_level_id = #{anchorLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="resources != null">
+        resources = #{resources,jdbcType=INTEGER},
+      </if>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationTime != null">
+        application_time = #{applicationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="becomeAnchorTime != null">
+        become_anchor_time = #{becomeAnchorTime,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null">
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoFlag != null">
+        video_flag = #{videoFlag,jdbcType=INTEGER},
+      </if>
+      <if test="accountStatus != null">
+        account_status = #{accountStatus,jdbcType=INTEGER},
+      </if>
+      <if test="jimPassword != null">
+        jim_password = #{jimPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rest.server.thinkcat.think.rest.member.pojo.MemberInfo">
+    update member_info
+    set uuid_qq = #{uuidQq,jdbcType=VARCHAR},
+      uuid_weixin = #{uuidWeixin,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      vip_status = #{vipStatus,jdbcType=INTEGER},
+      register_time = #{registerTime,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      person_desc = #{personDesc,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      person_img_url = #{personImgUrl,jdbcType=VARCHAR},
+      im_price = #{imPrice,jdbcType=BIGINT},
+      vip_begin_time = #{vipBeginTime,jdbcType=DATE},
+      vip_end_time = #{vipEndTime,jdbcType=DATE},
+      app_id = #{appId,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
+      virtual_coin = #{virtualCoin,jdbcType=BIGINT},
+      fans = #{fans,jdbcType=INTEGER},
+      concerns = #{concerns,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      video_price = #{videoPrice,jdbcType=BIGINT},
+      last_open_video_time = #{lastOpenVideoTime,jdbcType=TIMESTAMP},
+      anchor_flag = #{anchorFlag,jdbcType=INTEGER},
+      anchor_level_id = #{anchorLevelId,jdbcType=INTEGER},
+      resources = #{resources,jdbcType=INTEGER},
+      sequence = #{sequence,jdbcType=VARCHAR},
+      application_time = #{applicationTime,jdbcType=VARCHAR},
+      become_anchor_time = #{becomeAnchorTime,jdbcType=VARCHAR},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      video_flag = #{videoFlag,jdbcType=INTEGER},
+      account_status = #{accountStatus,jdbcType=INTEGER},
+      jim_password = #{jimPassword,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
